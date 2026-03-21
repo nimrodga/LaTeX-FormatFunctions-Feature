@@ -1,2 +1,1 @@
-# LaTeX-Projects
-LaTeX Files
+# LaTeX-Proyeccion Estreografica
