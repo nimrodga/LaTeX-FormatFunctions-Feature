@@ -1,0 +1,132 @@
+\documentclass{article}[pstricks,border=8pt,12pt] \usepackage[utf8]{inputenc} 
+\usepackage{geometry} [a4paper,lmargin=1.5cm,rmargin=1.5cm,Botton=1.5cm,top=1.75cm] \usepackage{graphicx} 
+\usepackage{wrapfig} 
+\usepackage{color} 
+\usepackage{amsmath} 
+\usepackage[T1]{fontenc} 
+\usepackage{amsfonts} 
+\usepackage{amssymb} 
+\usepackage{mathrsfs}
+\usepackage{cancel} 
+\usepackage[all]{xy} 
+\usepackage{pstricks} 
+\usepackage{pst-all} 
+\usepackage{pst-solides3d} 
+\usepackage{fancybox} 
+\usepackage{tikz} 
+\usepackage{tikz-3dplot} 
+\usepackage{gnuplottex} 
+\tikzset{flippedeventlabel/.append style={align=center}} \usetikzlibrary{matrix.skeleton} \usetikzlibrary[shapes,arrows,positioning,fit,backgrounds,intersections,shadows,calc,shadings] 
+\usetikzlibrary{positioning} 
+\usetikzlibrary{decorations.text} \usetikzlibrary{decorations.pathmorphing} \pgfdeclarelayer{background layer} 
+\pgfdeclarelayer{foreground layer} 
+\pgfsetlayers{background layer,main,foreground layer} 
+%\usetikzlibrary{datavisualization.formats.functions} \usepackage{pgf-pie} 
+\usepackage{color,colortbl} 
+\usepackage{lscape} 
+\usepackage{pgfplots} 
+\pgfplotsset{compat=newest}
+\usetikzlibrary{datavisualization} \usetikzlibrary[shapes,arrows.meta,positioning,fit,backgrounds,intersections,shadows,calc,datavisualization.formats.functions] \usetikzlibrary{patterns} \usepackage[colorlinks=true,linkcolor=black,citecolor=black,filecolor=magenta,urlcolor=blue]{hyperref} %Paquete de estilo de referencias 
+\urlstyle{same}  
+\date{\today} 
+% Start the document 
+\begin{document} 
+\pagecolor{black} 
+% Definición local de colores 
+\colorlet{AnguloH}{green!50!black} \colorlet{AnguloV}{magenta} \colorlet{Cesferica}{red} \colorlet{Ccilindrica}{blue} 
+%\begin{landscape} 
+\begin{center}
+\tdplotsetmaincoords{50}{135} \begin{tikzpicture}[scale=3.5,tdplot_main_coords] \coordinate (O) at (0,0,0); \coordinate (x) at (1,0,0); \coordinate (y) at (0,1,0); \coordinate (z) at (0,0,1); \draw[thick, >=Stealth, ->] (O) -- (x) node[anchor = north]{x}; % x
+\draw[thick, >=Stealth, ->] (O) -- (y) node[anchor = north]{y}; % y
+\draw[thick, >=Stealth, ->] (O) -- (z) node[anchor = south]{z}; % z
+\coordinate (xz) at (1,0,1); \coordinate (yz) at (0,1,1); 
+\coordinate (xy) at (1,1,0); 
+% text on the yz plane 
+\draw[canvas is yz plane at x = 0, transform shape, draw = red, fill = white, opacity = 1] (yz) rectangle (O); 
+\node[canvas is yz plane at x = 0] at (0,0.5,0.5) {\textcolor{magenta}{Tikz-3dplot}}; 
+\node[canvas is yz plane at x = 0] at (0,0.5,0.35) {\tiny{\textcolor{blue}{Nimrod Rodriguez}}}; 
+% text on the xz plane (Notice: it seems that the text has been reflected) 
+\draw[canvas is xz plane at y = 0,transform shape, draw = blue, fill = blue, opacity = 0.8] (xz) rectangle (O); 
+\node[canvas is zx plane at y = 0, align = center,rotate=-90] at (0.5,0,0.85){\textbf{\textcolor{white}{canvas zx}}}; 
+\node[canvas is zx plane at y = 0, align = center,rotate=-90] at (0.5,0,0.7){\Large{\textbf{\textcolor{white}{\LaTeX}}}}; 
+\node[canvas is zx plane at y = 0, align = center,rotate=-90] at (0.5,0,0.45){\textbf{\textcolor{white}{canvas xz}}}; 
+\node[canvas is xz plane at y = 0, align = center] at (0.5,0,0.3){\Large{\textbf{\textcolor{white}{\LaTeX}}}}; 
+\draw[canvas is xy plane at z = 0, transform shape, draw = magenta, fill = green!10, opacity = 0.8] (xy) rectangle (O); 
+\node[canvas is xy plane at z = 0, align = center,rotate=180] at (0.5,0.5,0){\textcolor{magenta}{Perspectiva En}}; 
+
+\end{tikzpicture}
+\end{center}
+\begin{tikzpicture}[ information text/.style={rounded corners, fill=blue!30!green!20,inner sep=2ex}] \draw [xshift=1.85cm,fill=orange!60] node [text width=14cm, information text,scale=1] {\qquad A continuación una ilustración en el uso de \texttt{\textbackslash tdplotsetmaincoords\{\textcolor{AnguloH}{$\theta_H$}\}\{\textcolor{AnguloV}{$\theta_V$}\} }, uno de los comamdos en el \texttt{frontend} de \texttt{Tikz-3dplot} para configurar la perspectiva de los ejes cartesianos en este paquete, esto mediante dos parámetros angulares, cuyos valores son los que van entre las llaves. Este comamdo se coloca justamente antes del entorno \texttt{tikzpicture} que contiene todo el código del gráfico. Recordamos que \LaTeX, utiliza el formato estándar para la perspectiva tridimensional: Un eje horizontal y uno vertical que se encuentran en el plano de la hoja del papel y un tercer eje que apunta saliendo perpendicularmente del plano que contiene a los primeros dos. Cuál se etiqueta como X, Y o Z, es a conveniencia, sin embargo lo usual es que Y sea el horizontal, Z el vertical y X el perpendicular saliendo del plano que contiene a los dos primeros. Cómo puede verse, este Comamdo ha sido desarrollado o diseñado, para dos rotaciones: \begin{itemize} \item La primera \textcolor{AnguloH}{$\theta_H$} grados respecto del eje \textbf{horizontal} (Y en el presente ejemplo). \item La segunda \textcolor{AnguloV}{$\theta_V$} grados respecto del eje \textbf{vertical} (Z en el presente ejemplo). \end{itemize} Si se desea implementar rotación respecto del tercer eje (X en el presente ejemplo) perpendicular al plano de los primeros dos, esto se realiza en la configuración del entorno \texttt{tikzpicture}, mediante \texttt{\textbackslash begin\{tikzpicture\} }$[rotate=\textcolor{blue}{\theta_P,...}]$, como se puede ver en el texto informativo de las figuras.}; 
+\end{tikzpicture} 
+%La proyección-1
+\begin{center}  
+\tdplotsetmaincoords{85}{110} 
+\begin{tikzpicture}[scale=0.7,tdplot_main_coords, information text/.style={rounded corners, fill=white!20!blue!10,inner sep=2ex}] 
+
+\tdplotsphericalsurfaceplot[smooth]{24}{24} {2}{black}{green} {\draw[color=orange,ultra thick,<->] (-9.5,0,-2) -- (9.5,0,-2) node[anchor=north east]{$\Large{X}$};} {\draw[color=red,ultra thick,<->] (0,-9.5,-2) -- (0,9.5,-2) node[anchor=north west]{$\Large{Y\hat{i}}$};} {} 
+\foreach \b in {-1.8,-1.6,...,1.8} 
+{
+\pgfmathsetmacro {\k}{sqrt(4-(\b)^2)} 
+\pgfmathsetmacro {\t}{4*\k/(2-\b)} 
+\pgfmathsetmacro {\a}{50} 
+
+\tdplotsinandcos{\sintheta}{\costheta}{\a} 
+\draw[dashed, blue] (0,0,2)--(\k*\costheta, \k*\sintheta, \b); 
+\draw[blue] (\k*\costheta, \k*\sintheta, \b)--(\t*\costheta, \t*\sintheta, -2); 
+\fill[white] (\k*\costheta, \k*\sintheta, \b) circle(1pt); \fill[green] (\t*\costheta, \t*\sintheta, -2)circle(1pt); 
+}
+\fill[white] (0,0,2) circle (2pt); \fill [white](0,0,-2) circle (2.5pt); 
+\draw (9.5,0,-2)node[white, below=1cm] {\LARGE{Proyección Estereográfica de $\mathcal{S}^3$ en $\mathbb{C}$}}; 
+\draw (10,0,-2)node[white, below=2cm] {\LARGE{$(x,y,z)$ $\mapsto$ $\frac{x}{1-z} + \frac{y}{1-z}\hat{i}$}}; 
+\draw [xshift=1.85cm] node [below=7cm,text width=5.5cm, information text,scale=1.5] { \texttt{\textbackslash tdplotsetmaincoords\{\textcolor{AnguloH}{85}\}\{\textcolor{AnguloV}{110}\} }\\ \texttt{\textbackslash begin\{tikzpicture\} } \\ \hspace{1cm} $\vdots$ \hspace{0.2cm} \textcolor{blue}{\tiny{código}}\\ \texttt{\textbackslash end\{tikzpicture\} } }; \end{tikzpicture} 
+\end{center} 
+%La proyección-2
+\begin{center}  
+\tdplotsetmaincoords{25}{125} 
+\begin{tikzpicture}[scale=0.7,tdplot_main_coords, information text/.style={rounded corners, fill=white!20!blue!10,inner sep=2ex}] 
+
+\tdplotsphericalsurfaceplot[smooth]{24}{24} {2}{black}{green} {\draw[color=orange,ultra thick,<->] (-9.5,0,-2) -- (9.5,0,-2) node[anchor=north east]{$\Large{X}$};} {\draw[color=red,ultra thick,<->] (0,-9.5,-2) -- (0,9.5,-2) node[anchor=north west]{$\Large{Y\hat{i}}$};} {} 
+\foreach \b in {-1.4,-1.2,...,1.4} 
+{
+\pgfmathsetmacro {\k}{sqrt(4-(\b)^2)} 
+\pgfmathsetmacro {\t}{4*\k/(2-\b)} 
+\foreach \a in {25,30,...,130} 
+{ 
+\tdplotsinandcos{\sintheta}{\costheta}{\a} 
+\draw[dashed, blue] (0,0,2)--(\k*\costheta, \k*\sintheta, \b); 
+\draw[ blue] (\k*\costheta, \k*\sintheta, \b)--(\t*\costheta, \t*\sintheta, -2); 
+\fill[white] (\k*\costheta, \k*\sintheta, \b) circle(1pt); \fill[green] (\t*\costheta, \t*\sintheta, -2)circle(1pt); 
+} 
+}
+\fill[white] (0,0,2) circle (2pt); \fill [white](0,0,-2) circle (2.5pt); 
+\draw (9.5,0,-2)node[white, below=1cm] {\LARGE{Proyección Estereográfica de $\mathcal{S}^3$ en $\mathbb{C}$}}; 
+\draw (10,0,-2)node[white, below=2cm] {\LARGE{$(x,y,z)$ $\mapsto$ $\frac{x}{1-z} + \frac{y}{1-z}\hat{i}$}}; 
+\draw [xshift=1.85cm] node [below=9cm,text width=5.5cm, information text,scale=1.5] { \texttt{\textbackslash tdplotsetmaincoords\{\textcolor{AnguloH}{25}\}\{\textcolor{AnguloV}{125}\} }\\ \texttt{\textbackslash begin\{tikzpicture\} } \\ \hspace{1cm} $\vdots$ \hspace{0.2cm} \textcolor{blue}{\tiny{código}}\\ \texttt{\textbackslash end\{tikzpicture\} } }; \end{tikzpicture} 
+\end{center} 
+\begin{landscape}
+%La proyección-3
+\begin{center}  
+\tdplotsetmaincoords{85}{110} 
+\begin{tikzpicture}[scale=0.6,tdplot_main_coords, information text/.style={rounded corners, fill=white!20!blue!10,inner sep=2ex}] 
+
+\tdplotsphericalsurfaceplot[smooth]{24}{24} {2}{black}{green} {\draw[color=orange,ultra thick,<->] (-9.5,0,-2) -- (9.5,0,-2) node[anchor=north east]{$\Large{X}$};} {\draw[color=red,ultra thick,<->] (0,-9.5,-2) -- (0,9.5,-2) node[anchor=north west]{$\Large{Y\hat{i}}$};} {} 
+\foreach \b in {-1.8,-1.6,...,1.8} { 
+\pgfmathsetmacro {\k}{sqrt(4-(\b)^2)} 
+\pgfmathsetmacro {\t}{4*\k/(2-\b)} 
+\foreach \a in {0,5,...,355} 
+{ 
+\tdplotsinandcos{\sintheta}{\costheta}{\a} 
+\draw[dashed, blue] (0,0,2)--(\k*\costheta, \k*\sintheta, \b); 
+\draw[ blue] (\k*\costheta, \k*\sintheta, \b)--(\t*\costheta, \t*\sintheta, -2); 
+\fill[white] (\k*\costheta, \k*\sintheta, \b) circle(1pt); \fill[green] (\t*\costheta, \t*\sintheta, -2)circle(1pt); 
+} 
+} 
+\fill[white] (0,0,2) circle (2pt); \fill [white](0,0,-2) circle (2.5pt); 
+\draw (9.5,0,-2)node[white, below=1cm] {\LARGE{Proyección Estereográfica de $\mathcal{S}^3$ en $\mathbb{C}$}}; 
+\draw (10,0,-2)node[white, below=2cm] {\LARGE{$(x,y,z)$ $\mapsto$ $\frac{x}{1-z} + \frac{y}{1-z}\hat{i}$}}; 
+\draw [xshift=1.85cm] node [below=5cm,text width=6cm, information text,scale=1.5] { \texttt{\textbackslash tdplotsetmaincoords\{\textcolor{AnguloH}{85}\}\{\textcolor{AnguloV}{110}\} }\\ \texttt{\textbackslash begin\{tikzpicture\}} \\ \hspace{1cm} $\vdots$ \hspace{0.2cm} \textcolor{blue}{\tiny{código}}\\ \texttt{\textbackslash end\{tikzpicture\} } }; \end{tikzpicture} 
+\end{center} 
+
+
+\end{landscape} 
+\end{document} 
